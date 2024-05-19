@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backenddeployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: back-end
+  template:
+    metadata:
+      labels:
+        app: back-end
+    spec:
+      containers:
+        - image: zin0096/back-end:1
+          imagePullPolicy: IfNotPresent
+          name: back-end
+      restartPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: back-end-service
+spec:
+  ports:
+    - nodePort: 31280
+      port: 80          # le port du service
+      protocol: TCP
+      targetPort: 8080   # le port du code (java dans ce cas la)
+  selector:
+    app: back-end
+  type: NodePort
+
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: back-end-proxy
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - microservice-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /backend/
+    rewrite:
+      uri: /
+    route:
+    - destination:
+        port:
+          number: 80
+        host: back-end-service.default.svc.cluster.local
+
+
