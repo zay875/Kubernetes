@@ -1,9 +1,10 @@
-#Coder une application web composée de deux services web :un frontend et un backend et faire communiquer les deux.#
+Coder une application web composée de deux services web :un frontend et un backend et faire communiquer les deux.
 
-#Deux services:
+Deux services:
 
 ●	Front-end.
 ●	Back-end.
+
 Le code source est disponible sur Github:
 https://github.com/charroux/CodingWithKubernetes
 
