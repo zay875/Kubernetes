@@ -1,4 +1,4 @@
-#Coder une application web composée de deux services web :un frontend et un backend et faire communiquer les deux.
+#Coder une application web composée de deux services web :un frontend et un backend et faire communiquer les deux.#
 
 #Deux services:
 
